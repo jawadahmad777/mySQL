@@ -1,0 +1,39 @@
+ <div class="container">
+          <div class="row">
+              <div class="col-xs-12">
+                <div class="carousel slide" data-ride="carousel" id="jawad">
+                    <ul class="carousel-indicators">
+                        <li data-target="#jawad" class="active" data-slide-to="0"></li>
+                         <li data-target="#jawad" data-slide-to="1"></li>
+                         <li data-target="#jawad" data-slide-to="2"></li>
+                         <li data-target="#jawad" data-slide-to="3"></li>
+                    </ul>
+                  <div class="carousel-inner" role="listbox">
+                      <div class="item active">
+                          <div class="thumbnail">
+                          <img src="photos/1st.jpg">
+                              </div>
+                      </div>
+                      <div class="item">
+                          <img src="photos/3rd.jpg.png">
+                      </div>
+                      <div class="item">
+                          <img src="photos/5th.jpg.png">
+                      </div>
+                      <div class="item">
+                          <img src="photos/jawad.png">
+                      </div>
+                    </div>
+                    <a href="#jawad" class="left carousel-control" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                    </a>
+                     <a href="#jawad" class="right carousel-control" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                    </a>
+                </div>
+             </div>
+          </div>
+      </div>
+      
