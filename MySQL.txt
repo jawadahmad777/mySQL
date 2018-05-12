@@ -1,0 +1,475 @@
+Some imporant queries of mySQL starting from scretch. That I have incounter so far.
+
+                                     How to start in database
+
+
+
+1. CREATE DATABASE test;
+
+Where test is the name of database. After creating the Database it not there to use we have to write a Query in oder to work in test.
+
+
+
+
+2. USE DATABASE test;
+
+This query enables us to use the test Database.
+
+
+3. DROP DATABASE test;
+
+We can delete a database using the DROP query.
+
+
+
+We store data in Database in form a table so we have to create a table, following is the query for that.
+
+4. CREATE TABLE customers;
+Where customers is the name of table. But it will give an error as a table is the combination of 
+column and rows. We must have to mention that like this
+
+CREATE TABLE customers(
+ID INT PRIMARY KEY auto_increment not null,
+fName varchar(222),
+lName varchar(222),
+email varchar(222),
+city varchar(222),
+country varchar(222)
+);
+
+5. DESCRIBE customers;
+
+To view the table we have the query.
+ 
+6. DROP TABLE customer;
+
+( We can drop a table in similer way as of draping a database)
+
+Now we have a table with the columns ID, fName, lName, email, city, country with the data type int and varchar.
+'ID', 'int(11)', 'NO', 'PRI', NULL, 'auto_increment'
+'fName', 'varchar(222)', 'YES', '', NULL, ''
+'lName', 'varchar(222)', 'YES', '', NULL, ''
+'email', 'varchar(222)', 'YES', '', NULL, ''
+'city', 'varchar(222)', 'YES', '', NULL, ''
+'country', 'varchar(222)', 'YES', '', NULL, ''
+
+To insert data into the customer table we have the following query..
+
+7. INSERT INTO customers(fName, lName, email, city, country) [Note we don't have to mention here ID as it it set to auto increment],
+VALUES ('Jawad','Khan','jawaduom7@gmail.com','Berlin','Germany');
+
+So far we have a table customers having the details of one customer 'Jawad'. The table looks like 
+
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany'.
+
+We can ofcourse add as many customers as we want.... so lets add few more customers
+
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany'
+'2', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany'
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila'
+'4', 'Boon', 'Shane', 'Shane7@yahoo.com', 'London', 'Engalnd'
+'5', 'Tamara', 'Schneider', 'tamara7@gmail.com', 'Dresden', 'Germany'
+'6', 'Some', 'Thing', 'some7@gmail.com', 'Paris', 'France'
+
+To view the content of the table we use the query 
+
+8. SELECT * FROM customers;
+
+[ using the * we want to view all the content or the column of the table].
+
+We can be more specific in that if we want to eg if we want only the customers fName then we can right the SELECT query like that.
+
+9. SELECT fName from customers;
+
+[similarlly we can access any required details]
+'Jawad'
+'Jawad'
+'David'
+'Boon'
+'Tamara'
+'Some'
+
+
+
+ 
+                               SELECT claus can be use in various ways to to get infos out of the table
+                                      [Using conditions etc] for example we want to see the
+                                customers only from Germany the select query for that would be like that .
+
+
+
+
+
+10. SELECT * from customers where country = 'Germany';
+
+1	Jawad	Khan	jawaduom7@gmail.com	Berlin	Germany
+2	Jawad	Khan	jawaduom7@gmail.com	Berlin	Germany
+5	Tamara Schneider tamara7@gmail.com	Dresden	Germany
+Now we have customers only from Germany out of the customers table.
+
+If we want to see just the countries name of our customers the query for that would be
+
+11. SELECT country from customers;
+'Germany'
+'Austraila'
+'Engalnd'
+'Germany'
+'France'
+But here is a repeat of a country name ie Germany is 2 times and we wanna see all the country without duplication....
+
+12. SELECT DISTINCT country FROM customers;
+Germany
+Austraila
+Engalnd
+France
+Now list of countries without duplicataions,,
+
+By default a table is order by ID numbers i.e 1 2 3 4 5 6 7 . . . . .
+We can change that order by using select quries...
+If we want to arrange our table by customers fName the query for that would be like that..
+
+13. SELECT * FROM customers order by fName[desc];
+
+'4', 'Boon', 'Shane', 'Shane7@yahoo.com', 'London', 'Engalnd', '52'
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila', '24'
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany', '23'
+'6', 'Some', 'Thing', 'some7@gmail.com', 'Paris', 'France', '35'
+'5', 'Tamara', 'Schneider', 'tamara7@gmail.com', 'Dresden', 'Germany', '26'
+
+Now our table is order by firstName starting from B D J S T... below are some more example
+[SELECT * FROM customers order by age;]
+Let's update the table we can add a colmun to the customers table.Using the alter claus
+
+14. ALTER TABLE customers ADD age VARCHAR(100);
+
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany', '23'
+'2', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany', '23'
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila', '24'
+'4', 'Boon', 'Shane', 'Shane7@yahoo.com', 'London', 'Engalnd', '52'
+'5', 'Tamara', 'Schneider', 'tamara7@gmail.com', 'Dresden', 'Germany', '26'
+'6', 'Some', 'Thing', 'some7@gmail.com', 'Paris', 'France', '35'
+And here it is a new coumun is been added to the customers table.. Now lets delete customer with the ID of 2.
+
+15. ALTER TABLE customers
+   DROP COLUMN age; 
+
+[It will delete the age column from the costumers table]We can also delete a customer from the table using the following query
+
+16. DELETE FROM customers 
+    WHERE ID = 2;
+
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany', '23'
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila', '24'
+'4', 'Boon', 'Shane', 'Shane7@yahoo.com', 'London', 'Engalnd', '52'
+'5', 'Tamara', 'Schneider', 'tamara7@gmail.com', 'Dresden', 'Germany', '26'
+'6', 'Some', 'Thing', 'some7@gmail.com', 'Paris', 'France', '35'
+Now we have a customer table without the customer that has an ID of 2.
+
+We can change the data type of a colmun using the following query..
+
+17. ALTER TABLE customers 
+    MODIFY COLUMN age int(11);
+ This will change the datatype of age from varchar to and int type.
+
+
+
+
+
+                                    Lets do some example with comparison operators.
+                             Famius operator are [<, >, <>, =, LIKE, ON, IN, <=, >=, AS, BETWEEN].
+
+
+
+
+
+If we want to view all the customer that are age less than 30.. Following query
+
+18. SELECT * FROM customers 
+    WHERE age < 30;
+
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany', '23'
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila', '24'
+'5', 'Tamara', 'Schneider', 'tamara7@gmail.com', 'Dresden', 'Germany', '26'
+Now we have all the customers in our table age < 30.  Similarly we have the > operator.
+
+If we want to view all the customers age > 30 . We have to write the follwing query.
+
+19. SELECT * FROM customers
+    WHERE age > 30;
+
+'4', 'Boon', 'Shane', 'Shane7@yahoo.com', 'London', 'Engalnd', '52'
+'6', 'Some', 'Thing', 'some7@gmail.com', 'Paris', 'France', '35'
+
+Using the  ' = ' operator we can get the result like 
+
+20. SELECT * FROM customers 
+WHERE id = 3;
+
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila', '24'
+
+Now come to the 'like' operator that use '%' sign to take action.  For example we want to view all the fName having the 'd' charactor
+
+21. SELECT * FROM customers
+    WHERE fName LIKE '%D';
+
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany', '23'
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila', '24'
+
+The like flag'%D' means show all the fName that ends with D. Jawad and David ends with D that is why desplayed. If we
+bring D before the wild card % then it will desplay all the fName starts with D. Consider the Example
+
+22. SELECT * FROM customers
+    WHERE fName LIKE 'd%';
+
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila', '24'
+
+Now we have Only David, Cos it is the only fName that starts with charactor D.
+ If we add the wild card % to the both sides of the charactor will means show all the fName having the charactors in them.
+ does't matter in start, ends or middle.
+
+23. SELECT * FROM customers
+    WHERE fName LIKE '%a%';
+
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany', '23'
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila', '24'
+'5', 'Tamara', 'Schneider', 'tamara7@gmail.com', 'Dresden', 'Germany', '26'
+
+Now we have the customers with fName having the charactor a.
+Similarly if we put NOT in the front of LIKE will means give me all the fName without the mentioned charactor. Example
+
+24. SEELCT * FROM customers
+    WHERE fName not LIKE '%d'
+
+'4', 'Boon', 'Shane', 'Shane7@yahoo.com', 'London', 'Engalnd', '52'
+'5', 'Tamara', 'Schneider', 'tamara7@gmail.com', 'Dresdon', 'Germany', '26'
+'6', 'Some', 'Thing', 'some7@gmail.com', 'Paris', 'France', '35'
+
+And we have customers with fName without charactor D in them.
+
+Now come to the other operator 'BETWEEN' that is use to select a range of values ie we want to view customer withen a particular age..
+
+25. SELECT * FROM customers
+    WHERE age BETWEEN 20 AND 30;
+
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany', '23'
+'3', 'David', 'Amad', 'david@gmail.com', 'Sydney', 'Austraila', '24'
+'5', 'Tamara', 'Schneider', 'tamara7@gmail.com', 'Dresden', 'Germany', '26'
+
+We have all the customers aging between 20 and 30.
+
+The IN operaror enable us to select mulutuple values using the where claus. Example
+
+26. SELECT * FROM customers
+    WHERE country IN ('France', 'Germany');
+
+'1', 'Jawad', 'Khan', 'jawaduom7@gmail.com', 'Berlin', 'Germany', '23'
+'5', 'Tamara', 'Schneider', 'tamara7@gmail.com', 'Dresden', 'Germany', '26'
+'6', 'Some', 'Thing', 'some7@gmail.com', 'Paris', 'France', '35'
+
+Now we have all the customers from France and Germany.....
+
+Index. Are use to improve the effetiency of the adminstrator. Index are not visiable to the users.. the query is below.
+
+
+
+
+
+
+
+
+27. CREATE INDEX nameOFindex 
+    ON nameOfTable ('nameOfColumn');
+
+
+
+
+
+
+
+                       Aggregate Functions in SQL are... 'AVG', 'COUNT', 'SUM', 'MAX', 'MIN',''''
+             let explore all these one by one..  AVG give us the average of a particular colmun we wish... Example
+
+
+
+
+
+
+28. SELECT AVG(age) 
+    FROM customers;
+
+32 is the avg
+
+In this case the average of colmun age is 32.
+
+If we want to count a particular colmun in this case take the example of age colmun.. Example
+
+29. SELECT COUNT(age)
+    FROM customers;
+
+5 Is the result set of count function which means that there are five number of ages..
+
+If we want to find out the sum of a particular colmun..Example
+
+30. SELECT SUM(age)
+    from customers;
+
+160 Which is the sum of all ages in colmun...
+
+Similarly we can find out the max and min number in the coulmn Example.
+
+31. SELECT MAX(age)
+    from customers;
+
+52 which is the maximum age present in the col.
+
+32. SELECT MIN(age)
+    from customers;
+
+23 which is the minimum age present in the col.
+
+ Some other cool query could be like
+
+33. SELECT age COUNT(age)
+    FROM customers
+    WHERE age > 30;
+
+
+
+
+
+                        ALIASES  OR   AS are use to give the colmun or table a temperary name that make it easy to read.
+
+
+
+
+34. SELECT 
+fName AS 'firstName',
+    
+lName AS 'lastName'
+ FROM customers;
+    Using the AS keyword it will change the colmun from fName to firstName and lName to lastName.......
+
+    Simmelerly We can concat or combine two colmun.
+
+35. select concat(fName, ' ', lName) 
+    as 'Name' from customers;
+
+
+
+   
+
+            A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+            (INNER) JOIN: Returns records that have matching values in both tables
+            LEFT (OUTER) JOIN: Return all records from the left table, and the matched records from the right table
+            RIGHT (OUTER) JOIN: Return all records from the right table, and the matched records from the left table
+            FULL (OUTER) JOIN: Return all records when there is a match in either left or right table.
+
+Consider the customers table below....
+
+id      fName   lName    email                city          country
+1	jawad	khan	jaawauom@gmail.com    berlin        germany
+2	abar	khn	jaam@gmail.com	      mascow	     rusia
+3	zaman	hejk	jaawauom@yahoo.com    london	   england
+4	adell	khan	adell@gmail.com	      mumbai	   india
+5	namra	xame	jaawauom@hot.com     new york	    usa
+6	kjjkj	jjkjkj	jkjkjkjkjjkjk		sydney	   australia
+7	uiuiu	uiuiiio  werfurjr              bejing	   japan
+
+
+consider another table orders below. To make an inner join b/w the two table we can first create a relation b/w them using 
+forgien key . In this table we have a forgien key on productId whis is references to the id col in customomer table.
+
+Order/
+Number  product  productId  price
+6	allo	   3	    23
+7	tomatoo    1	    23
+8      batengan    2	    53
+9	chars	   2	    24
+
+To make the inner join we have the following query
+
+36. select 
+   customers.fName, customers.email,
+   orders.product,orders.price
+
+   from customers 
+
+   inner join orders 
+
+   ON customers.id = orders.productId
+;
+
+That result in the follwing table..
+
+fName       email               producr  price
+zaman	jaawauom@yahoo.com	allo	23
+jawad	jaawauom@gmail.com	tomatoo	23
+abar	jaam@gmail.com	       batengan	53
+abar	jaam@gmail.com	      chars     24
+
+
+
+                         The LEFT JOIN keyword returns all records from the left table (table1), 
+      and the matched records from the right table (table2). The result is NULL from the right side, if there is no match.
+
+    If we apply the left join on the privious tables..
+
+37.select 
+   customers.fName, customers.email,
+   orders.product,orders.price
+
+   from customers 
+
+   left join orders 
+
+   ON customers.id = orders.productId
+;
+   
+                   It will porduce the following table
+
+'jawad', 'jaawauom@gmail.com',  'tomatoo',  '23'
+'abar', 'jaam@gmail.com',       'batengan', '53'
+'abar', 'jaam@gmail.com',         'chars',  '24'
+'zaman', 'jaawauom@yahoo.com',      'allo', '23'
+'adell', 'adell@gmail.com',          NULL  , NULL
+'namra', 'jaawauom@hot.com',        NULL,    NULL
+'kjjkj', 'jkjkjkjkjjkjk',             NULL, NULL
+'uiuiu', 'werfurjr',                   NULL, NULL
+
+
+
+                 The RIGHT JOIN keyword returns all records from the right table (table2), and the matched
+           records from the left table (table1). The result is NULL from the left side, when there is no match.
+
+          The resulting table can be like below
+
+
+'zaman', 'jaawauom@yahoo.com', 'allo', '23'
+'jawad', 'jaawauom@gmail.com', 'tomatoo', '23'
+'abar', 'jaam@gmail.com', 'batengan', '53'
+'abar', 'jaam@gmail.com', 'chars', '24'
+
+
+Which show all the matches from right table and all the matches from both tables..
+
+
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
